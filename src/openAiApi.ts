@@ -1,5 +1,3 @@
-const init = () => {
-  console.log('begin');
-};
+const init = async () => {};
 
 export default init;
