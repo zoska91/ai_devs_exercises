@@ -8,7 +8,7 @@ export const getFromChat = async (messages: Array<ChatCompletionMessageParam>) =
   const chatResp = await openai.chat.completions.create({
     messages: messages,
     model: 'gpt-3.5-turbo',
-    // model: 'gpt-4'
+    // model: 'gpt-4',
   });
 
   console.log(chatResp);
