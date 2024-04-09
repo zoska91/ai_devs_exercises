@@ -1,14 +1,13 @@
+import { get, post } from './restApi';
+
 const BASE_API_URL = 'https://tasks.aidevs.pl';
 
 export const getToken = async (taskName: string) => {
-  const token = await fetch(`${BASE_API_URL}/token/${taskName}`, {
-    method: 'POST',
-    body: JSON.stringify({
-      apikey: process.env.AI_DEVS_API_KEY,
-    }),
+  const body = JSON.stringify({
+    apikey: process.env.AI_DEVS_API_KEY,
   });
 
-  const jsonToken = await token.json();
+  const jsonToken = await post(`${BASE_API_URL}/token/${taskName}`, body);
   console.log('==== TOKEN ZADANIA ====');
   console.log({ jsonToken });
   console.log('================================================================');
@@ -18,7 +17,7 @@ export const getToken = async (taskName: string) => {
 
 export const getTask = async (token: string) => {
   const data = await fetch(`${BASE_API_URL}/task/${token}`);
-  const jsonData = await data.json();
+  const jsonData = await get(`${BASE_API_URL}/task/${token}`);
   console.log('==== TRESC ZADANIA ====');
   console.log({ jsonData });
   console.log('================================================================');

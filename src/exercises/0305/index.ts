@@ -31,14 +31,12 @@ export const solution = async () => {
 
     const content = answerFromDb?.[0]?.payload?.content as IPeople;
 
-    console.log({ content });
     if (!content) {
       console.log('no answer in db');
       return;
     }
 
     const infoAboutPerson = `Nazywam się: ${content.name}. Mój ulubiony kolor to: ${content.favoriteColor}. ${content.generalInfo}`;
-    console.log({ infoAboutPerson });
 
     const answer = await getFromChat([
       {
