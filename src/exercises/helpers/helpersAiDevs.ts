@@ -25,7 +25,7 @@ export const getTask = async (token: string) => {
   return jsonData;
 };
 
-export const answerPOST = async (token: string, answer: string) => {
+export const answerPOST = async (token: string, answer: string | number[]) => {
   const resp = await fetch(`${BASE_API_URL}/answer/${token}`, {
     method: 'POST',
     headers: {

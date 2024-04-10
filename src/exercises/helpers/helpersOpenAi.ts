@@ -16,6 +16,13 @@ export const getFromChat = async (messages: ChatCompletionMessageParam[]) => {
   return chatResp.choices[0].message.content;
 };
 
+export const getFromChatModeration = async (text: string) => {
+  const moderation = await openai.moderations.create({ input: text });
+
+  console.log(moderation);
+  return moderation.results[0].flagged;
+};
+
 export const getFromChatWhisper = async (file: fs.PathLike) => {
   const transcription = await openai.audio.transcriptions.create({
     file: fs.createReadStream(file),
