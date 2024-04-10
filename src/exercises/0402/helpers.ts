@@ -39,12 +39,3 @@ export const getDataType = async (sentence: string) => {
 
   return resp;
 };
-
-// If you decided that your answer is "Calendar" then add to response information which decided about date in english
-
-// examples:
-// sentence: "Mam zapisać się na AI Devs 3.0"
-// your answer: {tool: 'ToDo'} ,
-
-// sentence: "W poniedziałek są urodziny Zenona"
-// your answer: {tool: 'Calendar', date: "Monday"}
