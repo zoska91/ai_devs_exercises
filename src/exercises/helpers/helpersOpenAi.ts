@@ -43,3 +43,14 @@ export const getFromChatVision = async (messages: ChatCompletionMessageParam[]) 
   console.log(chatResp.choices[0]);
   return chatResp.choices[0].message.content;
 };
+
+export const getFromChatEmbeddings = async (messages: string) => {
+  const chatResp = await openai.embeddings.create({
+    input: messages,
+    model: 'text-embedding-ada-002',
+  });
+
+  console.log(chatResp);
+  console.log(chatResp.data[0]?.embedding.length);
+  return chatResp.data[0]?.embedding;
+};

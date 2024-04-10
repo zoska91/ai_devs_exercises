@@ -2,6 +2,7 @@ import express from 'express';
 import { solution as solution0104 } from './exercises/0104';
 import { solution as solution0105 } from './exercises/0105';
 import { solution as solution0202 } from './exercises/0202';
+import { solution as solution0203 } from './exercises/0203';
 import { solution as solution0305 } from './exercises/0305';
 import { solution as solution0401 } from './exercises/0401';
 import { solution as solution0402 } from './exercises/0402';
@@ -20,7 +21,8 @@ app.listen(port, () => {
 
 // solution0104();
 // solution0105();
-solution0202();
+// solution0202();
+solution0203();
 // solution0305();
 // solution0401();
 // solution0402();
