@@ -1,9 +1,9 @@
 import express from 'express';
 import { answerPOST, getTask, getToken } from '../helpers/helpersAiDevs';
-import { getFromChat } from '../helpers/helpersOpenAi';
+import { getChatAnswer, getJson, saveJson } from '../0404/helpers';
 
 const router = express.Router();
-const TASK_NAME = 'ownapi';
+const TASK_NAME = 'ownapipro';
 
 export const solution = async () => {
   const token = await getToken(TASK_NAME);
@@ -14,19 +14,31 @@ export const solution = async () => {
 
 solution();
 
-const getAnswer = async (question: string) => {
-  const answer = getFromChat([
-    {
-      role: 'user',
-      content: question,
-    },
-  ]);
+enum QuestionType {
+  info,
+  question,
+}
 
-  return answer;
+const getAnswer = async (question: string) => {
+  const jsonData = (await getJson()) || '';
+
+  const chatAnswer = await getChatAnswer(question, jsonData);
+
+  if (!chatAnswer) return 'something went wrong';
+  const chatAnswerObj: { type: QuestionType; answer: string } = JSON.parse(chatAnswer);
+
+  if (chatAnswerObj.type === QuestionType.info) {
+    const jsonDataToSave: string[] = JSON.parse(jsonData);
+
+    saveJson(JSON.stringify([jsonDataToSave, question]));
+  }
+
+  return chatAnswerObj.answer;
 };
 
 router.post('/answer', async (req, res) => {
   const { question } = req.body;
+
   const answer = await getAnswer(question);
 
   if (!answer) {
