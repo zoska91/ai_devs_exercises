@@ -2,7 +2,8 @@ import express from 'express';
 import ngrok from 'ngrok';
 
 // import answerRouter from './exercises/0404';
-import answerRouter from './exercises/0405';
+// import answerRouter from './exercises/0405';
+import answerRouter, { solution } from './exercises/0503';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.listen(PORT, async () => {
     .connect(PORT)
     .then((ngrokUrl: any) => {
       console.log(`Ngrok tunnel in: ${ngrokUrl}`); // Log the ngrok URL once the tunnel is established
+      solution(ngrokUrl);
     })
     .catch((error: any) => {
       console.log(`Couldn't tunnel ngrok: ${error}`); // Log an error if ngrok fails to start
